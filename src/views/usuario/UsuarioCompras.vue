@@ -2,16 +2,19 @@
   <section>
     <div v-if="compras">
       <h2>Compras</h2>
-      <div class="produtos-wrapper" v-for="(compra, index) in compras" :key="index">
-        <ProdutoItem v-if="compra.produto" :produto="compra.produto">
-          <p class="vendedor">
-            <span>Vendedor:</span>
-            {{compra.vendedor_id}}
-          </p>
-        </ProdutoItem>
+      <div
+        class="produtos-wrapper"
+        v-for="(compra, index) in compras"
+        :key="index"
+      >
+        <ProdutoItem v-if="compra.produto" :produto="compra.produto"
+          ><p class="vendedor">
+            <span>Vendedor:</span>{{ compra.vendedor_id }}
+          </p></ProdutoItem
+        >
       </div>
     </div>
-    <PaginaCarregando v-else/>
+    <PaginaCarregando v-else />
   </section>
 </template>
 
@@ -19,7 +22,6 @@
 import ProdutoItem from "@/components/ProdutoItem.vue";
 import { api } from "@/services.js";
 import { mapState } from "vuex";
-
 export default {
   components: {
     ProdutoItem

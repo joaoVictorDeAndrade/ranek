@@ -1,7 +1,7 @@
 <template>
   <ul v-if="paginasTotal > 1">
     <li v-for="pagina in paginas" :key="pagina">
-      <router-link :to="{query: query(pagina)}">{{pagina}}</router-link>
+      <router-link :to="{ query: query(pagina) }">{{ pagina }}</router-link>
     </li>
   </ul>
 </template>
@@ -33,14 +33,11 @@ export default {
       const offset = Math.ceil(range / 2);
       const total = this.paginasTotal;
       const pagesArray = [];
-
       for (let i = 1; i <= total; i++) {
         pagesArray.push(i);
       }
-
       pagesArray.splice(0, current - offset);
       pagesArray.splice(range, total);
-
       return pagesArray;
     },
     paginasTotal() {

@@ -15,13 +15,12 @@
         target="_blank"
       >Perdeu a senha? Clique aqui.</a>
     </p>
-    <LoginCriar/>
+    <LoginCriar />
   </section>
 </template>
 
 <script>
 import LoginCriar from "@/components/LoginCriar.vue";
-
 export default {
   name: "Login",
   components: {
@@ -39,15 +38,14 @@ export default {
   methods: {
     logar() {
       this.erros = [];
-      this.$store
-        .dispatch("logarUsuario", this.login)
-        .then(response => {
-          this.$store.dispatch("getUsuario");
-          this.$router.push({ name: "usuario" });
-        })
-        .catch(error => {
-          this.erros.push(error.response.data.message);
+      this.$store.dispatch("logarUsuario", this.login).then(response => {
+        this.$store.dispatch("getUsuario");
+        this.$router.push({
+          name: "usuario"
         });
+      }).catch(error => {
+        this.erros.push(error.response.data.message);
+      });
     }
   },
   created() {

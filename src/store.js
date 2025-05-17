@@ -1,9 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from 'vuex';
 import { api } from "@/services.js";
-Vue.use(Vuex);
 
-export default new Vuex.Store({
+export default createStore({
   strict: true,
   state: {
     login: false,
@@ -37,11 +35,9 @@ export default new Vuex.Store({
   },
   actions: {
     getUsuarioProdutos(context) {
-      return api
-        .get(`/produto?usuario_id=${context.state.usuario.id}`)
-        .then(response => {
-          context.commit("UPDATE_USUARIO_PRODUTOS", response.data);
-        });
+      return api.get(`/produto?usuario_id=${context.state.usuario.id}`).then(response => {
+        context.commit("UPDATE_USUARIO_PRODUTOS", response.data);
+      });
     },
     getUsuario(context) {
       return api.get(`/usuario`).then(response => {
@@ -50,18 +46,18 @@ export default new Vuex.Store({
       });
     },
     criarUsuario(context, payload) {
-      context.commit("UPDATE_USUARIO", { id: payload.email });
+      context.commit("UPDATE_USUARIO", {
+        id: payload.email
+      });
       return api.post("/usuario", payload);
     },
     logarUsuario(context, payload) {
-      return api
-        .login({
-          username: payload.email,
-          password: payload.senha
-        })
-        .then(response => {
-          window.localStorage.token = `Bearer ${response.data.token}`;
-        });
+      return api.login({
+        username: payload.email,
+        password: payload.senha
+      }).then(response => {
+        window.localStorage.token = `Bearer ${response.data.token}`;
+      });
     },
     deslogarUsuario(context) {
       context.commit("UPDATE_USUARIO", {

@@ -1,19 +1,20 @@
 <template>
   <section>
     <h2>Crie a Sua Conta</h2>
-    <ErroNotificacao :erros="erros"/>
-    <transition mode="out-in">
-      <button v-if="!criar" class="btn" @click="criar = true">Criar Conta</button>
-      <UsuarioForm v-else>
-        <button class="btn btn-form" @click.prevent="criarUsuario">Criar Usuário</button>
-      </UsuarioForm>
-    </transition>
+    <ErroNotificacao :erros="erros" /><transition mode="out-in"
+      ><button v-if="!criar" class="btn" @click="criar = true">
+        Criar Conta</button
+      ><UsuarioForm v-else
+        ><button class="btn btn-form" @click.prevent="criarUsuario">
+          Criar Usuário
+        </button></UsuarioForm
+      ></transition
+    >
   </section>
 </template>
 
 <script>
 import UsuarioForm from "@/components/UsuarioForm.vue";
-
 export default {
   name: "LoginCriar",
   components: {
@@ -35,7 +36,9 @@ export default {
         await this.$store.dispatch("criarUsuario", this.$store.state.usuario);
         await this.$store.dispatch("logarUsuario", this.$store.state.usuario);
         await this.$store.dispatch("getUsuario");
-        this.$router.push({ name: "usuario" });
+        this.$router.push({
+          name: "usuario"
+        });
       } catch (error) {
         button.removeAttribute("disabled");
         button.value = "Criar Usuário";
